@@ -13,3 +13,4 @@ git branch -M main
 git remote add origin https://github.com/sunarmzaa/remove.git
 git push -u origin main
 git push origin main
+git commit --amend --reset-author
