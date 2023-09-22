@@ -1,0 +1,14 @@
+https://github.com/igserdar/Image-Background-Remove-with-React
+npm install
+npm install react
+npm audit fix --force
+npm start
+npm run build
+
+echo "# remove" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/sunarmzaa/remove.git
+git push -u origin main
