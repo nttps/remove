@@ -24,24 +24,12 @@ export default function RemoveBackground() {
   const uploadImage = async () => {
     dispatch(setActionStatus(false));
 
-    const resizedImage = await loadImage(image, {
-      // resize before sending to Remove.bg for performance
-      maxWidth: 1500,
-      maxHeight: 1500,
-      canvas: true,
-    });
-
-    resizedImage.image.toBlob(async function (inputBlob) {
       const formData = new FormData();
-      formData.append("image_file", inputBlob);
+      formData.append("file", image);
 
-      const response = await fetch("https://api.remove.bg/v1.0/removebg", {
-        method: "POST",
-        headers: {
-          "X-Api-Key": "CwhYj4PpLSBRWmt4JT3Fa1GH",
-           //"X-Api-Key": "Rn1PbjhV5MbZvVahFJ7jfzoh",
-        },
-        body: formData,
+      const response = await fetch("http://localhost:5000/upload-file", {
+          method: "POST",
+          body: formData,
       });
 
       if (response.status === 200) {
@@ -53,12 +41,11 @@ export default function RemoveBackground() {
       const outputBlob = await response.blob();
 
       blob = URL.createObjectURL(outputBlob);
-      const image = document.getElementById("imageResult");
+      const imageResult = document.getElementById("imageResult");
       const down = document.getElementById("down");
-      image.src = blob;
+      imageResult.src = blob;
       down.href = blob;
       down.download = "signature.png";
-    });
   };
 
   return (
